@@ -1,5 +1,6 @@
 ﻿namespace Company.API.Interfaces.ServiceInterfaces;
 
-public interface ICompanyService
+public interface ICompanyService 
 {
+
 }

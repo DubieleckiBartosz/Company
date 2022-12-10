@@ -1,7 +1,10 @@
-﻿namespace Company.API.Models.Entities;
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace Company.API.Models.Entities;
 
 public class Address
 {
+    [BsonId]
     public Guid Id { get; private set; }
     public string City { get; private set; }
     public string PostalCode { get; private set; }

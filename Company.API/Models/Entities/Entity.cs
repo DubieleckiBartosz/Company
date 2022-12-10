@@ -1,7 +1,10 @@
-﻿namespace Company.API.Models.Entities;
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace Company.API.Models.Entities;
 
 public abstract class Entity
 {
+    [BsonId]
     public Guid Id { get; private set; }
     public DateTime Created { get; private set; }
     public DateTime Modified { get; private set; }
