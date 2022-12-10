@@ -13,6 +13,7 @@
   <ItemGroup>
     <Folder Include="Models\DataTransferObjects\" />
     <Folder Include="Models\DataAccessObjects\" />
+    <Folder Include="Configurations\" />
   </ItemGroup>
 
 </Project>

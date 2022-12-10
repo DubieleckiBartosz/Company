@@ -1,4 +1,5 @@
-﻿using Company.API.Models.Enums;
+﻿using Company.API.Common.Exceptions;
+using Company.API.Models.Enums;
 
 namespace Company.API.Models.Entities;
 
@@ -8,11 +9,7 @@ public class Department : Entity
     public DepartmentType DepartmentType { get; private set; }
     public List<Employee> Employees { get; private set; }
 
-    public Department()
-    {
-    }
-
-    private Department(string name, DepartmentType departmentType)
+    private Department(string name, DepartmentType departmentType) : base()
     {
         Name = name;
         DepartmentType = departmentType;
@@ -27,6 +24,10 @@ public class Department : Entity
     public void AddNewEmployee(Employee employee)
     {
         var employeeAlreadyExists = Employees.Any(_ => _.Id == employee.Id);
+        if (employeeAlreadyExists)
+        {
+            throw new CompanyAppBusinessException();
+        }
 
         Employees.Add(employee);
     }

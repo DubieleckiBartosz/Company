@@ -3,9 +3,9 @@
 public abstract class Entity
 {
     public Guid Id { get; private set; }
-    public DateTime Created { get; set; }
-    public DateTime Modified { get; set; }
-    public DateTime? Deleted { get; set; }
+    public DateTime Created { get; private set; }
+    public DateTime Modified { get; private set; }
+    public DateTime? Deleted { get; private set; }
 
     protected Entity()
     {
@@ -13,5 +13,15 @@ public abstract class Entity
         Created = DateTime.UtcNow;
         Modified = Created;
         Deleted = null;
+    }
+
+    public void SetModify()
+    {
+        Modified = DateTime.UtcNow;
+    }
+
+    public void SetDelete()
+    {
+        Deleted = DateTime.UtcNow;
     }
 }
