@@ -23,4 +23,9 @@ public class Response<T>
     {
         return new Response<T>(data, message);
     }
+
+    public static Response<List<T>> Ok(List<T> data)
+    {
+        return new Response<List<T>>(data, null);
+    }
 }

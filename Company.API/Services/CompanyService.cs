@@ -3,8 +3,11 @@ using Company.API.Interfaces.RepositoryInterfaces;
 using Company.API.Interfaces.ServiceInterfaces;
 using Company.API.Models.DataTransferObjects;
 using Company.API.Models.Documents;
+using Company.API.Models.Searches.Queries;
 using Company.API.Models.Views;
 using Company.API.Wrappers;
+using MongoDB.Driver;
+using System.Collections.Generic;
 
 namespace Company.API.Services;
 
@@ -69,9 +72,17 @@ public class CompanyService : ICompanyService
         return Response<CompanyDetailsView>.Ok(companyView);
     }
 
-    public Task<CompanyView> GetCompaniesBySearchAsync(string id)
+    public async Task<Response<List<CompanyView>>> GetCompaniesBySearchAsync(GetCompaniesBySearchQuery query)
     {
-        throw new NotImplementedException();
+        var companies = await _companyRepository.GetCompaniesBySearchAsync(query.Sort.Name, query.Sort.Type,
+            query.SearchQuery.PageNumber, query.SearchQuery.PageSize, query.Id, query.Name);
+        if (companies == null || companies.Any() == false)
+        {
+            throw new NotFoundException();
+        }
+        var companyView = companies.Select(CompanyView.MapFromCompany).ToList(); 
+
+        return Response<List<CompanyView>>.Ok(companyView);
     }
 }
 

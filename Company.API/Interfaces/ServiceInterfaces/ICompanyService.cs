@@ -1,4 +1,5 @@
 ﻿using Company.API.Models.DataTransferObjects;
+using Company.API.Models.Searches.Queries;
 using Company.API.Models.Views;
 using Company.API.Wrappers;
 
@@ -11,5 +12,5 @@ public interface ICompanyService
     Task<Response<CompanyView>> GetByIdAsync(string id);
     Task<Response<CompanyWithDepartmentsView>> GetByIdWithDepartmentsAsync(string id);
     Task<Response<CompanyDetailsView>> GetByIdDetailsAsync(string id);
-    Task<CompanyView> GetCompaniesBySearchAsync(string id);
+    Task<Response<List<CompanyView>>> GetCompaniesBySearchAsync(GetCompaniesBySearchQuery query);
 }

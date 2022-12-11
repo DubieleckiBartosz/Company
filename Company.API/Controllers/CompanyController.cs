@@ -1,6 +1,8 @@
 ﻿using Company.API.Interfaces.ServiceInterfaces;
 using Company.API.Models.DataParameters;
 using Company.API.Models.DataTransferObjects;
+using Company.API.Models.Searches.Parameters;
+using Company.API.Models.Searches.Queries;
 using Company.API.Models.Views;
 using Company.API.Wrappers;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +47,17 @@ public class CompanyController : ControllerBase
     public async Task<IActionResult> GetCompanyDetailsById([FromRoute] string id)
     {
         var result = await _companyService.GetByIdDetailsAsync(id);
+        return Ok(result);
+    }
+    
+    [HttpPost("[action]")]
+    [ProducesResponseType(typeof(Response<List<CompanyView>>), 200)]
+    [ProducesResponseType(typeof(object), 400)]
+    [ProducesResponseType(typeof(object), 500)]
+    public async Task<IActionResult> GetCompaniesBySearch([FromBody] GetCompaniesBySearchParameters parameters)
+    {
+        var query = GetCompaniesBySearchQuery.Create(parameters);
+        var result = await _companyService.GetCompaniesBySearchAsync(query);
         return Ok(result);
     }
 
