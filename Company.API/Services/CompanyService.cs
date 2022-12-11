@@ -1,4 +1,5 @@
-﻿using Company.API.Interfaces.RepositoryInterfaces;
+﻿using Company.API.Common.Exceptions;
+using Company.API.Interfaces.RepositoryInterfaces;
 using Company.API.Interfaces.ServiceInterfaces;
 using Company.API.Models.DataTransferObjects;
 using Company.API.Models.Documents;
@@ -45,14 +46,27 @@ public class CompanyService : ICompanyService
     public async Task<Response<CompanyWithDepartmentsView>> GetByIdWithDepartmentsAsync(string id)
     {
         var company = await _companyRepository.GetByIdAsync(id);
+        if (company == null)
+        {
+            throw new NotFoundException();
+        }
+
         var companyWithDepartments = CompanyWithDepartmentsView.MapFromCompany(company);
 
         return Response<CompanyWithDepartmentsView>.Ok(companyWithDepartments);
     }
 
-    public Task<CompanyView> GetByIdDetailsAsync(string id)
+    public async Task<Response<CompanyDetailsView>> GetByIdDetailsAsync(string id)
     {
-        throw new NotImplementedException();
+        var company = await _companyRepository.GetByIdAsync(id);
+        if (company == null)
+        {
+            throw new NotFoundException();
+        }
+
+        var companyView = CompanyDetailsView.Create(company);
+
+        return Response<CompanyDetailsView>.Ok(companyView);
     }
 
     public Task<CompanyView> GetCompaniesBySearchAsync(string id)

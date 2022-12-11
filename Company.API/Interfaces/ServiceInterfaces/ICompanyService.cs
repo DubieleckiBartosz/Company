@@ -10,6 +10,6 @@ public interface ICompanyService
     Task AddNewDepartmentAsync(NewCompanyDepartmentDto newCompanyDepartmentDto);
     Task<Response<CompanyView>> GetByIdAsync(string id);
     Task<Response<CompanyWithDepartmentsView>> GetByIdWithDepartmentsAsync(string id);
-    Task<CompanyView> GetByIdDetailsAsync(string id);
+    Task<Response<CompanyDetailsView>> GetByIdDetailsAsync(string id);
     Task<CompanyView> GetCompaniesBySearchAsync(string id);
 }

@@ -1,7 +1,5 @@
 ﻿using Company.API.Common.Constants;
-using Company.API.Interfaces.RepositoryInterfaces;
-using Company.API.Models.Documents;
-using MongoDB.Bson;
+using Company.API.Interfaces.RepositoryInterfaces; 
 using MongoDB.Driver; 
 
 namespace Company.API.Repositories.MongoRepositories;
@@ -13,7 +11,7 @@ public class CompanyRepository : ICompanyRepository
     public CompanyRepository(MongoContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
-        _companyCollection ??= _context.GetCollection<Models.Documents.Company>(Collections.CompanyCollection);
+        _companyCollection ??= _context.GetCollection<Models.Documents.Company>(MongoConstants.CompanyCollection);
     }
     public async Task AddAsync(Models.Documents.Company company)
     {
@@ -43,30 +41,11 @@ public class CompanyRepository : ICompanyRepository
         throw new NotImplementedException();
     }
 
-
-    //DEPARTMENT Operations
-    public async Task AddEmployeeToDepartmentAsync(string companyId, Department department)
-    {
-        var newEmployee = department.Employees.Last();
-
-        var filter = Builders<Models.Documents.Company>.Filter.And(
-            Builders<Models.Documents.Company>.Filter.Eq(_ => _.Id, companyId),
-            Builders<Models.Documents.Company>.Filter.Eq("Departments.DepartmentUniqueCode",
-                department.DepartmentUniqueCode));
-        
-        var update = Builders<Models.Documents.Company>.Update.Push("Departments.$.Employees", newEmployee);
-
-        await _companyCollection.FindOneAndUpdateAsync(filter, update);
-    }
-
-
-    public async Task<Department?> GetDepartmentFromCompanyByCodeAsync(string companyId, string departmentCode)
-    {  
-        var department = await _companyCollection.Find(FilterCompany(companyId))
-            .Project(_ => _.Departments.FirstOrDefault(_ => _.DepartmentUniqueCode == departmentCode)).FirstOrDefaultAsync();
-         
-        return department;
-    }
+    public CompanyEmployeeRepository CompanyEmployeeAccess () =>
+        new CompanyEmployeeRepository(companyCollection: _companyCollection);
+    
+    public CompanyDepartmentRepository CompanyDepartmentAccess () =>
+        new CompanyDepartmentRepository(companyCollection: _companyCollection);
 
     private FilterDefinition<Models.Documents.Company> FilterCompany(string id) =>
         Builders<Models.Documents.Company>.Filter.Eq(_ => _.Id, id);

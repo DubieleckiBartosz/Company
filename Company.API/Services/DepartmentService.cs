@@ -3,23 +3,24 @@ using Company.API.Interfaces.RepositoryInterfaces;
 using Company.API.Interfaces.ServiceInterfaces;
 using Company.API.Models.DataTransferObjects;
 using Company.API.Models.Documents;
+using Company.API.Repositories.MongoRepositories;
 
 namespace Company.API.Services;
 
 public class DepartmentService : IDepartmentService
 {
 
-    private readonly ICompanyRepository _companyRepository;
+    private readonly CompanyDepartmentRepository _departmentRepository;
 
     public DepartmentService(IWrapperRepository wrapperRepository)
     {
-        _companyRepository = wrapperRepository.CompanyRepository;
+        _departmentRepository = wrapperRepository.CompanyRepository.CompanyDepartmentAccess();
     }
 
     public async Task AddNewEmployeeAsync(NewDepartmentEmployeeDto employeeDto)
     {
         var department =
-            await _companyRepository.GetDepartmentFromCompanyByCodeAsync(employeeDto.CompanyId,
+            await _departmentRepository.GetDepartmentFromCompanyByCodeAsync(employeeDto.CompanyId,
                 employeeDto.DepartmentCode);
 
         if (department == null)
@@ -34,6 +35,6 @@ public class DepartmentService : IDepartmentService
 
         department.AddNewEmployee(newEmployee);
 
-        await _companyRepository.AddEmployeeToDepartmentAsync(employeeDto.CompanyId, department);
+        await _departmentRepository.AddEmployeeToDepartmentAsync(employeeDto.CompanyId, department);
     }
 }

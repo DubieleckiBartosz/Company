@@ -15,7 +15,8 @@ public class DepartmentController : ControllerBase
     public DepartmentController(IDepartmentService departmentService)
     {
         _departmentService = departmentService;
-    }
+    } 
+
     [HttpPost("[action]")]
     [ProducesResponseType(typeof(Response<string>), 200)]
     [ProducesResponseType(typeof(object), 400)]
