@@ -10,6 +10,7 @@ public static class DependencyInjection
     public static WebApplicationBuilder GetDependencyInjection(this WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<ICompanyService, CompanyService>();
+        builder.Services.AddScoped<IDepartmentService, DepartmentService>();
         builder.Services.AddScoped<IWrapperRepository, WrapperRepository>();
         builder.Services.AddSingleton<MongoContext>();
 

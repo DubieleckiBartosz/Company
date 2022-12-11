@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-
-namespace Company.API.Models.Documents;
+﻿namespace Company.API.Models.Documents;
 
 public class Address
 {

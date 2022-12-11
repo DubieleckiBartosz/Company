@@ -19,8 +19,7 @@ public class Employee : Base
 
     public static Employee Create(string firstName, string lastName, Address address, Contract contract)
     {
-        var employee = new Employee(firstName, lastName, address, contract);
-        contract.AssignEmployee(employee);
+        var employee = new Employee(firstName, lastName, address, contract); 
 
         return employee;
     }

@@ -4,13 +4,12 @@ using Company.API.Models.Enums;
 namespace Company.API.Models.Documents;
 
 public class Contract : Base
-{
-    public Employee Employee { get; private set; }
-    public decimal Salary { get; }
-    public DateTime Start { get; }
-    public DateTime? End { get; }
-    public int HoursPerMonth { get; }
-    public ContractType ContractType { get; }
+{ 
+    public decimal Salary { get; private set; }
+    public DateTime Start { get; private set; }
+    public DateTime? End { get; private set; }
+    public int HoursPerMonth { get; private set; }
+    public ContractType ContractType { get; private set; }
 
     private Contract(decimal salary, DateTime start, DateTime? end, int hoursPerMonth, ContractType contractType) : base()
     {
@@ -24,15 +23,5 @@ public class Contract : Base
     public static Contract Create(decimal salary, DateTime start, DateTime? end, int hoursPerMonth, ContractType contractType)
     {
         return new Contract(salary, start, end, hoursPerMonth, contractType);
-    }
-
-    public void AssignEmployee(Employee employee)
-    {
-        if (Employee != null)
-        {
-            throw new CompanyAppBusinessException();
-        }
-
-        Employee = employee;
-    }
+    } 
 }
