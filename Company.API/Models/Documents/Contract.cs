@@ -1,9 +1,9 @@
 ﻿using Company.API.Common.Exceptions;
 using Company.API.Models.Enums;
 
-namespace Company.API.Models.Entities;
+namespace Company.API.Models.Documents;
 
-public class Contract : Entity
+public class Contract : Base
 {
     public Employee Employee { get; private set; }
     public decimal Salary { get; }

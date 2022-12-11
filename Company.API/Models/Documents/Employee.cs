@@ -1,20 +1,20 @@
-﻿namespace Company.API.Models.Entities;
+﻿namespace Company.API.Models.Documents;
 
-public class Employee : Entity
+public class Employee : Base
 {
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
-    public Guid Code { get; private set; }
-    public Address Address { get; private set; }
+    public string Code { get; private set; }
+    public Address EmployeeAddress { get; private set; }
     public List<Contract> Contracts { get; private set; }
-    
-    private Employee(string firstName, string lastName, Address address, Contract contract) : base()
+
+    private Employee(string firstName, string lastName, Address employeeAddress, Contract contract) : base()
     {
-        Code = Guid.NewGuid();
+        Code = Guid.NewGuid().ToString();
         FirstName = firstName;
         LastName = lastName;
-        Address = address;
-        Contracts = new List<Contract> {contract};
+        EmployeeAddress = employeeAddress;
+        Contracts = new List<Contract> { contract };
     }
 
     public static Employee Create(string firstName, string lastName, Address address, Contract contract)

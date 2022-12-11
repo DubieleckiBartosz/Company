@@ -7,14 +7,6 @@ namespace Company.API.Repositories.MongoRepositories;
 public class MongoContext
 {
     public IMongoDatabase Database { get; }
-
-    public const string CompanyCollection = "Companies";
-    public const string EmployeeCollection = "Employees";
-    public const string AddressCollection = "Addresses";
-    public const string DepartmentCollection = "Departments";
-    public const string ContractCollection = "Contracts";
-
-
     public MongoContext(IOptions<MongoConnections> connectionOptions)
     {
         if (connectionOptions == null)

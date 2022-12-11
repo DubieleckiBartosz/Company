@@ -1,9 +1,9 @@
 ﻿using Company.API.Common.Exceptions;
 using Company.API.Models.Enums;
 
-namespace Company.API.Models.Entities;
+namespace Company.API.Models.Documents;
 
-public class Company : Entity
+public class Company : Document
 {
     public string Name { get; private set; }
     public string Description { get; private set; }
@@ -23,7 +23,7 @@ public class Company : Entity
         return new Company(name, description, address);
     }
 
-    public Guid NewDepartment(string name, DepartmentType departmentType)
+    public void NewDepartment(string name, DepartmentType departmentType)
     {
         var alreadyExists = Departments.Any(_ => _.Name == name);
         if (alreadyExists)
@@ -31,7 +31,7 @@ public class Company : Entity
             throw new CompanyAppBusinessException();
         }
 
-        var department = Department.Create(name, departmentType);
-        return department.Id;
-    } 
+        var department = Department.Create(name, departmentType); 
+        Departments.Add(department);
+    }
 }

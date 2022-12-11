@@ -11,7 +11,7 @@ builder.Configuration
 
 // Add services to the container.
 
-builder.GetDependencyInjection();
+builder.GetDependencyInjection().SetOptions();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

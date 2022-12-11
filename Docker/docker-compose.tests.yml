@@ -7,7 +7,7 @@ networks:
 services:
   mongo:
     image: mongo
-    container_name: mongo-database
+    container_name: mongo-company-db
     restart: unless-stopped 
     ports:
       - 27015:27017
@@ -15,22 +15,22 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=rootuser
       - MONGO_INITDB_ROOT_PASSWORD=rootpass
     networks:
-        - company_network
+        - company-service-network
     #volumes:
     #  - mongodb-data
 
   mongo-express:
     image: mongo-express
-    container_name: mongo-express
+    container_name: mongo-express-company
     restart: unless-stopped 
     ports:
-      - 8081:8081
+      - 8071:8081
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
       - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
-      - ME_CONFIG_MONGODB_SERVER=mongo-database
+      - ME_CONFIG_MONGODB_SERVER=mongo-company-db
     networks:
-        - company_network
+        - company-service-network
     depends_on:
       - mongo
 

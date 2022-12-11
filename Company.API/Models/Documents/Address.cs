@@ -1,18 +1,15 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace Company.API.Models.Entities;
+namespace Company.API.Models.Documents;
 
 public class Address
 {
-    [BsonId]
-    public Guid Id { get; private set; }
     public string City { get; private set; }
     public string PostalCode { get; private set; }
     public string Street { get; private set; }
-    
+
     private Address(string city, string postalCode, string street)
     {
-        Id = Guid.NewGuid();
         City = city;
         PostalCode = postalCode;
         Street = street;

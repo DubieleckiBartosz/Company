@@ -2,8 +2,9 @@
 
 public interface ICompanyRepository
 {
-    Task<Models.Entities.Company> GetByIdAsync(Guid id);
-    Task<Models.Entities.Company> GetByIdWithDepartmentsAsync(Guid id);
-    Task<Models.Entities.Company> GetByIdDetailsAsync(Guid id);
-    Task<Models.Entities.Company> GetCompaniesBySearchAsync(Guid id); 
+    Task AddAsync(Models.Documents.Company company);
+    Task AddDepartmentAsync(Models.Documents.Company company);
+    Task<Models.Documents.Company> GetByIdAsync(string id); 
+    Task<Models.Documents.Company> GetByIdDetailsAsync(string id);
+    Task<Models.Documents.Company> GetCompaniesBySearchAsync(string id); 
 }

@@ -1,18 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿namespace Company.API.Models.Documents;
 
-namespace Company.API.Models.Entities;
-
-public abstract class Entity
+public abstract class Base
 {
-    [BsonId]
-    public Guid Id { get; private set; }
     public DateTime Created { get; private set; }
     public DateTime Modified { get; private set; }
     public DateTime? Deleted { get; private set; }
-
-    protected Entity()
+    protected Base()
     {
-        Id = Guid.NewGuid();
         Created = DateTime.UtcNow;
         Modified = Created;
         Deleted = null;
