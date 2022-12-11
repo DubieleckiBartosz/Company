@@ -8,13 +8,16 @@ public class Company : Document
     public string Name { get; private set; }
     public string Description { get; private set; }
     public Address Address { get; private set; }
-    public List<Department> Departments { get; private set; }
+    public List<Department> Departments { get; private set; } = new List<Department>();
 
+    public Company()
+    {
+    }
     private Company(string name, string description, Address address) : base()
     {
         Name = name;
         Description = description;
-        Address = address;
+        Address = address; 
         Departments = new List<Department>();
     }
 

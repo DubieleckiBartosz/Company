@@ -11,6 +11,9 @@ public class Contract : Base
     public int HoursPerMonth { get; private set; }
     public ContractType ContractType { get; private set; }
 
+    public Contract()
+    {
+    }
     private Contract(decimal salary, DateTime start, DateTime? end, int hoursPerMonth, ContractType contractType) : base()
     {
         Salary = salary;

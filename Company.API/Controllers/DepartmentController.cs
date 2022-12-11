@@ -29,14 +29,14 @@ public class DepartmentController : ControllerBase
         return NoContent();
     }
 
-    [HttpPost("[action]")]
-    [ProducesResponseType(typeof(Response<List<>>), 200)]
-    [ProducesResponseType(typeof(object), 400)]
-    [ProducesResponseType(typeof(object), 500)]
-    public async Task<IActionResult> GetDepartmentsBySearch()
-    {
-        var dto = NewDepartmentEmployeeDto.Create(companyId, parameters);
-        await _departmentService.AddNewEmployeeAsync(dto);
-        return NoContent();
-    }
+    //[HttpPost("[action]")]
+    //[ProducesResponseType(typeof(Response<List<>>), 200)]
+    //[ProducesResponseType(typeof(object), 400)]
+    //[ProducesResponseType(typeof(object), 500)]
+    //public async Task<IActionResult> GetDepartmentsBySearch()
+    //{
+    //    var dto = NewDepartmentEmployeeDto.Create(companyId, parameters);
+    //    await _departmentService.AddNewEmployeeAsync(dto);
+    //    return NoContent();
+    //}
 }

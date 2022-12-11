@@ -6,8 +6,11 @@ public class Employee : Base
     public string LastName { get; private set; }
     public string Code { get; private set; }
     public Address EmployeeAddress { get; private set; }
-    public List<Contract> Contracts { get; private set; }
+    public List<Contract> Contracts { get; private set; } = new List<Contract>();
 
+    public Employee()
+    {
+    }
     private Employee(string firstName, string lastName, Address employeeAddress, Contract contract) : base()
     {
         Code = Guid.NewGuid().ToString();

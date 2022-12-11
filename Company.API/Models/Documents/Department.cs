@@ -8,13 +8,16 @@ public class Department : Base
     public string Name { get; private set; }
     public string DepartmentUniqueCode { get; private set; }
     public DepartmentType DepartmentType { get; private set; }
-    public List<Employee> Employees { get; private set; }
+    public List<Employee> Employees { get; private set; } = new List<Employee>();
 
+    public Department()
+    {
+    }
     private Department(string name, DepartmentType departmentType) : base()
     {
         Name = name;
         DepartmentType = departmentType;
-        DepartmentUniqueCode = Guid.NewGuid().ToString();
+        DepartmentUniqueCode = Guid.NewGuid().ToString(); 
         Employees = new List<Employee>();
     }
      

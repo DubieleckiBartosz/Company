@@ -6,6 +6,9 @@ public class Address
     public string PostalCode { get; private set; }
     public string Street { get; private set; }
 
+    public Address()
+    {
+    }
     private Address(string city, string postalCode, string street)
     {
         City = city;
